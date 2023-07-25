@@ -22,6 +22,7 @@ public class Programa
             input = Opcion();
             switch(input){
                 case 1:
+                    Console.Clear();
                     MostratLista();
                     Console.Write("Presione Enter Para Continuar->");
                     Console.ReadLine();
@@ -31,16 +32,22 @@ public class Programa
                     AgregarUsuario();
                     break;
                 case 3:
+                    Console.Clear();
                     MostrarUsuario();
                     break;
+                case 4:
+                    Console.Clear();
+                    EliminarUsuario();
+                    break;
                 case 5:
+                    Console.Clear();
                     Console.WriteLine("Hasta Luego");
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Input invalido vuelva a intentarlo");
                     break;
             }
-                
         }while(input != 5);
     }
       public static void Menu(){
@@ -68,7 +75,7 @@ public class Programa
             Console.Write("Agregue un Hobbie-> ");
             string hobie = Console.ReadLine();
             hobbies.Add(hobie);
-            Console.Write("Desea Continuar-> ");
+            Console.Write("Desea Seguir Agregando hobbies (s/n)-> ");
             seguir = Console.ReadLine() == "s" ? true : false;
         }
         Usuarios.Add(cedula,new Usuario(nombre, edad, hobbies));
@@ -85,18 +92,22 @@ public class Programa
         int cedula = int.Parse(Console.ReadLine());
         if(Usuarios.ContainsKey(cedula)){
             Usuario usuario = Usuarios[cedula];
-            Console.WriteLine($"Nombre ->{usuario.Nombre}");
-            Console.WriteLine($"Edad ->{usuario.Edad}");
-            Console.WriteLine($"Cedula ->{cedula}");
+            Console.WriteLine($"Nombre -> {usuario.Nombre}");
+            Console.WriteLine($"Edad -> {usuario.Edad}");
+            Console.WriteLine($"Cedula -> {cedula}");
         }
         Console.Write("Presione Enter Para Continuar->");
         Console.ReadLine();
     }
     public static void EliminarUsuario(){
+        MostratLista();
         Console.Write("Ingrese La Cedula Del Usuario-> ");
         int cedula = int.Parse(Console.ReadLine());
         if(Usuarios.ContainsKey(cedula)){
             Usuarios.Remove(cedula);
+        }
+        else{
+            throw new FormatException("No se Encontro la llave");
         }
     }
 }
